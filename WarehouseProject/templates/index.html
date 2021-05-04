@@ -1,0 +1,81 @@
+
+{%load static%}
+{% include 'header.html' %}
+      <section class="py-5">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-4">
+                    <div class="card bg-danger">
+                        <div class="card-body">
+                            <img src="{% static './img/list-icons-free-download-png-and-svg-list-icon-png-256_256.png' %}" alt="" class="img-fluid icon-img">
+                         <h3><a href="" class="text-light text-decoration-none">Item Table</a></h3>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="card bg-warning">
+                        <div class="card-body">
+                            <img src="{% static './img/category-icon-png-5.png' %}" alt="" class="img-fluid icon-img">
+                         <h3><a href="{% url 'add-category' %}" class="text-light text-decoration-none">Add New Category</a></h3>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="card bg-secondary">
+                        <div class="card-body">
+                            <img src="{% static './img/Graphicloads-Colorful-Long-Shadow-Add.ico'%}" alt="" class="img-fluid icon-img">
+                         <h3><a href="" class="text-light text-decoration-none">Add New Item</a></h3>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-lg-4">
+                  <div class="card bg-primary">
+                      <div class="card-body">
+                          <img src="{% static './img/kisspng-chart-computer-icons-analysis-research-statistics-5ad795ad8aa1b9.1052028415240779975678.jpg'%}" alt="" class="img-fluid icon-img">
+                       <h3><a href="" class="text-light text-decoration-none">Report</a></h3>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="card bg-success">
+                      <div class="card-body">
+                          <img src="{% static './img/865-8659441_community-knights-third-party-vendor-icon.png'%}" alt="" class="img-fluid icon-img">
+                       <h3><a href="{% url 'add-vendor' %}" class="text-light text-decoration-none">Add New Vendor</a></h3>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card cat-card">
+                        <div class="card-body">
+                            <img src="{% static './img/table_header.png' %}" alt="" class="img-fluid icon-img">
+                         <h3><a href="{% url 'category-list' %}" class="text-light text-decoration-none">Category Table</a></h3>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-4 mt-5">
+                    <div class="card cat-vendor">
+                        <div class="card-body">
+                            <img src="{% static './img/imgbin-vendor-management-system-organization-supply-chain-management-business-kggbnqzDDCT4ZzSL5Am7vRxAp_t.jpg'%}" alt="" class="img-fluid icon-img">
+                         <h3><a href="{% url 'vendor-list' %}" class="text-light text-decoration-none">Vendors Table</a></h3>
+                        </div>
+                      </div>
+                  </div>
+         
+         
+            </div>
+          </div>
+      </section>
+
+
+ 
+
+
+
+{% include 'footer.html' %}
+
+
+

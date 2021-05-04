@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'header.html' %}
+
+<section class="py-5">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-12">
+        <h3 class="font-weight-bold">Category Table</h3>
+				<table class="table table-secondary">
+  <thead>
+    <tr>
+      <th scope="col">sl</th>
+      <th scope="col">Name</th>
+      <th scope="col">Store Date</th>
+      <th scope="col">Last Updated</th>
+      <th scope="col">Action</th>
+
+     
+    </tr>
+  </thead>
+  <tbody>
+  	{% for cat in  queryset %}
+    <tr>
+      <th>{{cat.id}}</th>
+      <td>{{cat.name}}</td>
+      <td>{{cat.storeDate}}</td>
+      <td>{{cat.lastUpdate}}</td>
+      <td><a href="{% url 'update-category' cat.id %}" class="btn btn-primary btn-sm">Edit</a>||<a href="{% url 'delete-category' cat.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include 'footer.html' %}

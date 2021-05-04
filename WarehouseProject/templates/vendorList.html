@@ -1,0 +1,46 @@
+{% load static %}
+{% include 'header.html' %}
+
+<section class="py-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+        <h3 class="font-weight-bold">Vendors Table</h3>
+				<table class="table table-success">
+  <thead>
+    <tr>
+      <th scope="col">sl</th>
+      <th scope="col">Company</th>
+      <th scope="col">Client Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Created on</th>
+      <th scope="col">Last Updated</th>
+      <th scope="col">Action</th>
+
+
+     
+    </tr>
+  </thead>
+  <tbody>
+  	{% for vendor in  queryset %}
+    <tr>
+      <th>{{vendor.id}}</th>
+      <td>{{vendor.company}}</td>
+      <td>{{vendor.name}}</td>
+      <td>{{vendor.phone}}</td>
+       <td>{{vendor.email}}</td>
+        <td>{{vendor.created}}</td>
+        <td>{{vendor.lastUpdate}}</td>
+      <td><a href="{% url 'update-vendor' vendor.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+      <td><a href="{% url 'delete-vendor' vendor.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include 'footer.html' %}
