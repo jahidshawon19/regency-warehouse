@@ -14,4 +14,10 @@ urlpatterns = [
     path('edit_vendor/<str:pk>/',views.updateVendor,name='update-vendor'),
     path('del_vendor/<str:pk>/',views.deleteVendor,name='delete-vendor'),
 
+
+    path('items/',views.itemList,name='item-list'),
+    path('add_item/',views.addItem,name='add-item'),
+    path('edit_item/<str:pk>/',views.updateItem,name='update-item'),
+    path('del_item/<str:pk>/',views.deleteItem,name='delete-item'),
+
 ]

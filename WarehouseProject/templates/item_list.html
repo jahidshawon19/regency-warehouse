@@ -4,8 +4,8 @@
 
 <section class="py-5">
 	<div class="container">
-        <div class="row">
-          {% if messages %}
+    <div class="row">
+                {% if messages %}
         <ul class="messages">
                {% for message in messages %}
                      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
@@ -13,14 +13,13 @@
        </ul>
   {% endif %}
       <div class="col-lg-12">
-
-        <h3 class="text-center font-weight-bold">Category Table</h3>
+        <h3 class="text-center font-weight-bold">Item Table</h3>
         <hr>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6 py-2">
-        <p class="font-weight-bold">Total: {{totalCat}}</p>
+        <p class="font-weight-bold">Total: {{totalItem}}</p>
         <form method='POST' action=''>{% csrf_token %}
           {{form|crispy}}
         <input type="submit" class = "btn btn-warning" value='Search'/>
@@ -31,34 +30,38 @@
   
     <div class="col-lg-4"></div>
     <div class="col-lg-2">
-      <a href="{% url 'add-category' %}" class="btn btn-primary btn-lg">Create New</a>
+      <a href="{% url 'add-item' %}" class="btn btn-success btn-lg">Create New</a>
     </div>
   </div>
      
+
 		<div class="row">
 
 			<div class="col-lg-12">
-        <h3 class="font-weight-bold">Category Table</h3>
+        
 				<table class="table table-secondary">
   <thead>
     <tr>
       <th scope="col">sl</th>
-      <th scope="col">Name</th>
-      <th scope="col">Store Date</th>
+      <th scope="col">Category</th>
+      <th scope="col">Item Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Created</th>
       <th scope="col">Last Updated</th>
-      <th scope="col">Action</th>
 
      
     </tr>
   </thead>
   <tbody>
-  	{% for cat in  queryset %}
+  	{% for item in queryset %}
     <tr>
-      <th>{{cat.id}}</th>
-      <td>{{cat.name}}</td>
-      <td>{{cat.storeDate}}</td>
-      <td>{{cat.lastUpdate}}</td>
-      <td><a href="{% url 'update-category' cat.id %}" class="btn btn-primary btn-sm">Edit</a>||<a href="{% url 'delete-category' cat.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+      <th>{{item.id}}</th>
+      <td>{{item.category}}</td>
+      <td>{{item.itemName}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.created}}</td>
+      <td>{{item.lastUpdate}}</td>
+      <td><a href="{% url 'update-item' item.id %}" class="btn btn-primary btn-sm">Edit</a>||<a href="{% url 'delete-item' item.id %}" class="btn btn-danger btn-sm">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>
