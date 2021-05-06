@@ -4,12 +4,14 @@ from .forms import *
 from django.http import HttpResponse 
 import csv
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+@login_required
 def index(request):
 	return render(request,"index.html")
 
 ##################### CATEGORY VIEWS START #######################
+@login_required
 def category(request):
 	queryset=Category.objects.all()
 	totalCat=queryset.count()
@@ -23,7 +25,7 @@ def category(request):
 		'form':form,
 	}
 	return render(request, "categoryList.html", context)
-
+@login_required
 def addCategory(request):
 	form = CatagoryCreateForm(request.POST or None)
 	if form.is_valid():
@@ -36,7 +38,7 @@ def addCategory(request):
 	}
 	return render(request, 'genral_form.html', context)
 
-
+@login_required
 def updateCategory(request,pk):
 	queryset = Category.objects.get(id=pk)
 	form = CategoryUpdateForm(instance=queryset)
@@ -53,7 +55,7 @@ def updateCategory(request,pk):
 	}
 	return render(request, 'genral_form.html', context)
 
-
+@login_required
 def deleteCategory(request,pk):
 	queryset = Category.objects.get(id=pk)
 	if request.method == 'POST':
@@ -68,6 +70,7 @@ def deleteCategory(request,pk):
 
 
 ####################### VENDORS VIEWS START ####################
+@login_required
 def vendor(request):
 	queryset= Vendor.objects.all()
 	totalVendor = queryset.count()
@@ -80,7 +83,7 @@ def vendor(request):
 		'form':form,
 	} 
 	return render(request, 'vendorList.html', context)
-
+@login_required
 def addVendor(request):
 	form = VendorCreateForm(request.POST or None)
 	if form.is_valid():
@@ -94,7 +97,7 @@ def addVendor(request):
 	return render(request, 'genral_form.html', context)
 
 
-
+@login_required
 def updateVendor(request,pk):
 	queryset=Vendor.objects.get(id=pk)
 	form = VendorUpdateForm(instance=queryset)
@@ -112,7 +115,7 @@ def updateVendor(request,pk):
 	return render(request, 'genral_form.html', context)
 
 
-
+@login_required
 def deleteVendor(request,pk):
 	queryset = Vendor.objects.get(id=pk)
 	if request.method == 'POST':
@@ -124,7 +127,7 @@ def deleteVendor(request,pk):
 
 
 ############################# ITEM VIEWS START ########################
-
+@login_required
 def itemList(request):
 	queryset = Stock.objects.all().order_by('created')
 	totalItem = queryset.count()
@@ -150,7 +153,7 @@ def itemList(request):
 	}
 
 	return render(request, 'item_list.html',context)
-
+@login_required
 def addItem(request):
 	form = ItemCreateForm(request.POST or None)
 	if form.is_valid():
@@ -163,7 +166,7 @@ def addItem(request):
 	}
 	return render(request, 'genral_form.html', context)
 
-
+@login_required
 def updateItem(request,pk):
 	queryset=Stock.objects.get(id=pk)
 	form = ItemUpdateForm(instance=queryset)
@@ -180,7 +183,7 @@ def updateItem(request,pk):
 	}
 	return render(request, 'genral_form.html', context)
 
-
+@login_required
 def deleteItem(request,pk):
 	queryset = Stock.objects.get(id=pk)
 	if request.method == 'POST':
@@ -189,3 +192,45 @@ def deleteItem(request,pk):
 		return redirect('item-list')
 	return render(request, 'genral_delete.html')
 ############################# ITEM VIEWS END ########################
+
+
+
+############################### ISSUE ITEMS VIEW START ######################
+@login_required
+def issueItem(request,pk):
+	queryset = Stock.objects.get(id=pk)
+	form = IssueForm(request.POST or None, instance=queryset)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		if instance.quantity>instance.issueQuantity:
+			instance.quantity -= instance.issueQuantity
+			messages.success(request, "Issued Successfully."+str(instance.quantity)+" "+str(instance.itemName)+"s now left in store")
+			instance.save()
+			return redirect('item-list')
+	context = {
+		"queryset":queryset,
+		"form":form,
+	}
+	return render(request, 'genral_form.html', context)
+
+############################### ISSUE ITEMS VIEW END ######################
+
+
+################################ RECEIVE ITEMS VIEW START #######################
+@login_required
+def receiveItem(request,pk):
+	queryset = Stock.objects.get(id=pk)
+	form = ReceiveForm(request.POST or None, instance=queryset)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.quantity += instance.receiveQuantity
+		instance.save()
+		messages.success(request, "Receive Successfully."+ str(instance.quantity)+" "+str(instance.itemName)+"s now in store.")
+		return redirect('item-list')
+	context = {
+		'queryset':queryset,
+		'form':form,
+	}
+	return render(request, 'genral_form.html', context)
+
+################################ RECEIVE ITEMS VIEW END #######################

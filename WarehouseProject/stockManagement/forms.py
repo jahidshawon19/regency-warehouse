@@ -94,3 +94,17 @@ class ItemSearchForm(forms.ModelForm):
 	class Meta:
 		model=Stock
 		fields = ['itemName']
+
+
+
+
+class IssueForm(forms.ModelForm):
+	class Meta:
+		model = Stock 
+		fields = ['issueQuantity', 'issueTo']
+
+
+class ReceiveForm(forms.ModelForm):
+	class Meta:
+		model = Stock 
+		fields = ['receiveQuantity', 'receiveBy']

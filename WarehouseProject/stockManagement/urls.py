@@ -20,4 +20,9 @@ urlpatterns = [
     path('edit_item/<str:pk>/',views.updateItem,name='update-item'),
     path('del_item/<str:pk>/',views.deleteItem,name='delete-item'),
 
+
+
+    path('issue_item/<str:pk>/', views.issueItem,name="issue-item"),
+    path('receive_item/<str:pk>/', views.receiveItem,name="receive-item"),
+
 ]

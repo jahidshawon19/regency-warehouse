@@ -1,0 +1,25 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% include 'header.html' %}
+
+<section class="py-5 bg-light">
+	<div class="container">
+		<div class="row">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h2 class="text-center text-success font-weight-bold">Regency Warehouse</h2>
+			<hr>
+			<h4 class="text-center">Login Panel</h4>
+			<form method="post">
+				{% csrf_token %}
+				{{ form|crispy}}
+				<button class="btn btn-primary">Log In</button>
+			</form>
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+	</div>
+</section>
+
+
+{% include 'footer.html' %}
